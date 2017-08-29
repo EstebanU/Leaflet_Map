@@ -1,0 +1,31 @@
+---
+title: "Simple Leaflet Map"
+author: "E. Urdiales"
+date: "8-28-17"
+output: ioslides_presentation
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, cache = TRUE}
+speed <- read.csv("Speed_Camera_Locations.csv", header = TRUE, 
+                  colClasses = c(rep("character", 4), rep("numeric", 2), "character"))
+speed <- speed[, c(1, 5, 6)]
+names(speed) <- tolower(names(speed))
+coordinates <- speed[, c(2, 3)]
+```
+
+*** 
+### Speed Camera Locations in the City of Chicago
+```{r}
+library(leaflet)
+my_map <- leaflet() %>%
+    addTiles()
+
+coordinates %>%
+    leaflet() %>%
+    addTiles() %>%
+    addMarkers()
+```
